@@ -1,0 +1,22 @@
+<div id="content pt-5">
+    <div class="container pt-4">
+        <div class="row">
+            <div class="col-3 p-2" *ngFor="let item of list" >
+                <div class="toast show p-2" role="alert" aria-live="assertive" aria-atomic="true" style="border-left: solid 4px orange;">
+                    <div class="row">
+                        <div class="col-3">
+                            <span class="mr-1">
+                                <img class="user-img" src="{{photoURL || '../../../../assets/original.png'}}" alt="" >
+                            </span>    
+                        </div>                    
+                        <div class="col-9 pt-1">
+                            <strong>Rahul Aher</strong>
+                            <br>
+                            <small>Developer</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

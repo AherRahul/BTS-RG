@@ -1,0 +1,37 @@
+.timeline-resource-grouping.e-schedule:not(.e-device) .e-agenda-view .e-content-wrap table td:first-child {
+    width: 90px;
+}
+
+.timeline-resource-grouping.e-schedule .e-agenda-view .e-resource-column {
+    width: 100px;
+}
+
+.timeline-resource-grouping.e-schedule .e-timeline-month-view .e-work-days.project1,
+.timeline-resource-grouping.e-schedule .e-timeline-view .e-work-hours.project1 {
+    background-color: #faebd7;
+}
+
+.timeline-resource-grouping.e-schedule .e-timeline-month-view .e-work-days.project2,
+.timeline-resource-grouping.e-schedule .e-timeline-view .e-work-hours.project2 {
+    background-color: #deecfc;
+}
+
+.timeline-resource-grouping.e-schedule .e-timeline-month-view .e-work-days.project3,
+.timeline-resource-grouping.e-schedule .e-timeline-view .e-work-hours.project3 {
+    background-color: #deeeac;
+}
+
+.timeline-resource-grouping.e-schedule .e-timeline-month-view .e-work-days.project4,
+.timeline-resource-grouping.e-schedule .e-timeline-view .e-work-hours.project4 {
+    background-color: #faebd7;
+}
+
+.timeline-resource-grouping.e-schedule .e-timeline-month-view .e-work-days.project5,
+.timeline-resource-grouping.e-schedule .e-timeline-view .e-work-hours.project5 {
+    background-color: #deecfc;
+}
+
+.timeline-resource-grouping.e-schedule .e-timeline-month-view .e-work-days.project6,
+.timeline-resource-grouping.e-schedule .e-timeline-view .e-work-hours.project6 {
+    background-color: #deecfc;
+}

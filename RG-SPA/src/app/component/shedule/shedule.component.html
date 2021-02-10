@@ -1,0 +1,21 @@
+<div class="control-section">
+    <div class="col-lg-12 content-wrapper">
+
+        <ejs-schedule id="schedule" #scheduleObj width='100%' cssClass='timeline-resource-grouping' height='100%' [selectedDate]="selectedDate" [currentView]="currentView" [group]="group" [eventSettings]="eventSettings" (created)='onCreate()' (dataBinding)="onDataBinding()"
+            (actionBegin)="onActionBegin($event)" (dataBound)="onDataBound()" (actionComplete)="onActionComplete($event)" (renderCell)="onRenderCell($event)">
+            <e-resources>
+                <e-resource field='ProjectId' title='Choose Project' [dataSource]='projectDataSource' [allowMultiple]='allowMultiple' name='Projects' textField='text' idField='id' colorField='color' groupIDField='HospitalGroupId'>
+                </e-resource>
+                <e-resource field='TaskId' title='Category' [dataSource]='categoryDataSource' [allowMultiple]='allowMultiple' name='Categories' textField='text' idField='id' colorField='color' groupIDField='DoctorGroupId' startHourField='startHour' endHourField='endHour'>
+                </e-resource>
+            </e-resources>
+            <e-views>
+                <e-view option="TimelineDay"></e-view>
+                <e-view option="TimelineWeek"></e-view>
+                <e-view option="TimelineWorkWeek"></e-view>
+                <e-view option="TimelineMonth"></e-view>
+                <e-view option="Agenda"></e-view>
+            </e-views>
+        </ejs-schedule>
+    </div>
+</div>
