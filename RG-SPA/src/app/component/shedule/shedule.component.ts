@@ -1,8 +1,6 @@
-import { Component, ViewEncapsulation, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { extend , addClass} from '@syncfusion/ej2-base';
-import {
-    TimelineViewsService, AgendaService, GroupModel, EventSettingsModel, ResizeService, DragAndDropService
-, ActionEventArgs, RenderCellEventArgs, EventRenderedArgs} from '@syncfusion/ej2-angular-schedule';
+import { TimelineViewsService, AgendaService, GroupModel, EventSettingsModel, ResizeService, DragAndDropService, ActionEventArgs, RenderCellEventArgs, EventRenderedArgs} from '@syncfusion/ej2-angular-schedule';
 
 @Component({
   selector: 'app-shedule',
@@ -11,10 +9,10 @@ import {
 })
 export class SheduleComponent implements OnInit {
 
-  constructor() { }
+    constructor() { }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+    }
 
     onCreate(): void {
         // tslint:disable-next-line: no-console

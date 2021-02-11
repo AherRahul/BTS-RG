@@ -44,6 +44,7 @@ export class LoginComponent implements OnInit {
         this.tokenService.SetToken(data.token);
         this.loginForm.reset();
         this.isLoggedIn.emit(true);
+        this.alertify.success('Login Successful..!!')
         this.router.navigate(['schedule']);
       },
       err => {
