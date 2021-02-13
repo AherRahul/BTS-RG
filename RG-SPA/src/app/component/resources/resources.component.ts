@@ -21,6 +21,7 @@ export class ResourcesComponent implements OnInit {
     { text: 'Akhil Ben', id: 1, color: '#56ca85', role: 'Designer'},
     { text: 'Rahul Aher', id: 4, color: '#04ccf9', role: 'Developer' },
     { text: 'Divya Nair', id: 7, color: '#db6be8', role: 'Project Manager' },
+    { text: 'Prashant E.G.', id: 5, color: '#db6be8', role: 'Project Manager' },
     { text: 'Prashant Kutty', id: 8, color: '#df5286', role: 'Director' },
     { text: 'Ajay Chayya', id: 9, color: '#f97504', role: 'Functional Head'},
     { text: 'Amruta Deshmukh', id: 10, color: '#f4086a', role: 'QA'}

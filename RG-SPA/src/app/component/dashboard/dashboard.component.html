@@ -42,47 +42,71 @@
                               </tr>
                             </thead>
                             <tbody>
-                              <tr class="table-active">
+                              <tr *ngFor="let allocation of todaysAllocation; index as i" [class.table-active]="i % 2 === 0"  data-toggle="modal" data-target=".bd-example-modal-lg" (click)='modePopUp(allocation)'>
                                 <th scope="row">
                                     <span class="mr-1">
                                         <img class="user-img" src="{{photoURL || '../../../../assets/original.png'}}" alt="" >
                                     </span>
-                                Rahul Aher</th>
-                                <td>4h</td>
+                                {{allocation.Resource}}</th>
+                                <td>{{allocation.Total}}</td>
                                 <td class="details">
-                                    <span class="project">Salesforce SKO 2021 Customiza...</span>
-                                    <span class="project-code"> (CX01)</span>
-                                    <div class="details-wrap" title="Microsoft ITO Phase 3 (MI69)">
-                                        <small>content updates</small>
+                                    <span class="project">{{allocation.Project}}</span>
+                                    <span class="project-code"> {{allocation.ProjectCode}}</span>
+                                    <div class="details-wrap" title="{{allocation.Project}} {{allocation.ProjectCode}}">
+                                        <small>{{allocation.Details}}</small>
                                     </div>
                                 </td>
                                 <td>
-                                    <b>BTS</b>
+                                    <b>{{allocation.Client}}</b>
                                 </td>
-                                <td>Divya Nair</td>
+                                <td>{{allocation.Booker}}</td>
                               </tr>
-                              <tr>
-                                <th scope="row">
-                                    <span class="mr-1">
-                                        <img class="user-img" src="{{photoURL || '../../../../assets/original.png'}}" alt="" >
-                                    </span>
-                                Rahul Aher</th>
-                                <td>4h</td>
-                                <td class="details">
-                                    <span class="project">Microsoft ITO Phase 3</span>
-                                    <span class="project-code"> (MI69)</span>
-                                    <div class="details-wrap" title="MSFT Phase 3">
-                                        <small>MSFT Phase 3</small>
-                                    </div>
-                                </td>
-                                <td>
-                                    <b>Microsoft</b>
-                                </td>
-                                <td>Kinjal Gadani</td>
-                              </tr>
-                              
+
                             </tbody>
-                          </table>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card border-secondary mb-3">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-3" >
+                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-stopwatch pt-1" viewBox="0 0 25 25">
+                                    <path d="M8.5 5.6a.5.5 0 1 0-1 0v2.9h-3a.5.5 0 0 0 0 1H8a.5.5 0 0 0 .5-.5V5.6z"/>
+                                    <path d="M6.5 1A.5.5 0 0 1 7 .5h2a.5.5 0 0 1 0 1v.57c1.36.196 2.594.78 3.584 1.64a.715.715 0 0 1 .012-.013l.354-.354-.354-.353a.5.5 0 0 1 .707-.708l1.414 1.415a.5.5 0 1 1-.707.707l-.353-.354-.354.354a.512.512 0 0 1-.013.012A7 7 0 1 1 7 2.071V1.5a.5.5 0 0 1-.5-.5zM8 3a6 6 0 1 0 .001 12A6 6 0 0 0 8 3z"/>
+                                </svg>
+                                <span class="pl-1 lead pt-1" style="font-size: 25px">Booking</span>
+                            </div>
+                            <div class="col-9" style="text-align: end">
+                                <strong>{{currentAllocation.Total}}</strong> per day
+                                <br>
+                                <small>{{currentAllocation.Date}}</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="pt-3" id="general">
+                            <span><strong>Resource:</strong> {{currentAllocation.Resource}}</span><br>
+                            <span><strong>Project:</strong> {{currentAllocation.Project}} {{currentAllocation.ProjectCode}}</span><br>
+                            <span><strong>Client:</strong> {{currentAllocation.Client}}</span><br>
+                            <span><strong>Total:</strong> {{currentAllocation.Total}}</span><br>
+                            <span><strong>Details:</strong> {{currentAllocation.Details}}</span><br>
+                            <span><strong>Billable:</strong> {{currentAllocation.Billable}}</span><br>
+                            <span><strong>Booker:</strong> {{currentAllocation.Booker}}</span>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -1,12 +1,12 @@
 <div id="content pt-5">
-    <div class="container pt-4">
+    <div class="container pt-4 mb-5">
         <div class="border mt-5 p-2" *ngFor="let r of roles">
             <div class="role-heading p-2 card-header">
                 <h5 class="text-center">{{r.role}}</h5>
             </div>
 
             <div class="row">
-                <div class="col-3 p-3"  *ngFor="let resource of r.resource"  data-toggle="modal" data-target=".bd-example-modal-lg" (click)='modePopUp(resource)'>
+                <div class="col-3 p-3"  *ngFor="let resource of r.resource" data-toggle="modal" data-target=".bd-example-modal-lg" (click)='modePopUp(resource)'>
                     <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true" style='border-left: solid 4px' [style.border-color]="resource.color">
                         <div class="row">
                             <div class="col-4 p-2 pl-4" style="background-color: rgb(0 0 0 / 3%);">
