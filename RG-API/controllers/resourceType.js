@@ -9,16 +9,18 @@ module.exports = {
         await ResourceType.findById(Id).exec((error, resource) => {
             if (error) {
                 return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
-                    error: "Error while getting the ResourceType"
+                    error: "Error while getting the Resource Type..!!"
                 });
             }
 
             if (!resource) {
                 return res.status(HttpStatus.NOT_FOUND).json({
-                    error: "No Resource in DB"
+                    error: "No Resource type found..!!"
                 });
             }
 
+            resource.createdAt = resource.updatedAt = resource.__v = undefined;
+            
             req.resourceType = resource;
             next();
         });
@@ -34,14 +36,18 @@ module.exports = {
         await ResourceType.find().exec((error, resources) => {
             if (error) {
                 return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
-                    error: "Error while getting all the Resources"
+                    error: "Error while fetching all the Resources Type..!!"
                 });
             }
 
             if (!resources) {
                 return res.status(HttpStatus.NOT_FOUND).json({
-                    error: "No Resource in DB"
+                    error: "No Resource Type found..!!"
                 });
+            }
+
+            for(let i = 0; i < resources.length; i++) {
+                resources[i].createdAt = resources[i].updatedAt = resources[i].__v = undefined;
             }
 
             return res.status(HttpStatus.OK).json(resources);
@@ -50,36 +56,39 @@ module.exports = {
 
     async CreateResource(req, res) {
         var schema = Joi.object().keys({
-            resourceName: Joi.string().alphanum().min(3).max(30).required()
+            typeName: Joi.string().min(3).max(30).required(),
+            note: Joi.string().min(0).max(250)
         });
 
         const { error, value } = schema.validate(req.body);
         if (error && error.details) {
-            return res.status(HttpStatus.BAD_REQUEST).json({ msg: error.details })
+            return res.status(HttpStatus.BAD_REQUEST).json({ msg: error.details });
         }
 
         const resource = await ResourceType.findOne({
-            resourceName: Helpers.firstUpper(req.body.resourceName)
+            typeName: Helpers.firstUpper(req.body.typeName)
         });
         if (resource) {
             return res.status(HttpStatus.CONFLICT).json({
-                error: "Resource already exist in DB"
+                error: "Resource Type already exist..!!"
             });
         }
 
-        req.body.resourceName = Helpers.firstUpper(req.body.resourceName);
+        req.body.typeName = Helpers.firstUpper(req.body.typeName);
 
         var resourceType = new ResourceType(req.body);
 
         await resourceType.save((error, resource) => {
             if (error || !resource) {
                 return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
-                    error: "Unable to save resource type"
+                    error: "Unable to save Resource type..!!"
                 });
             }
 
+            resource.createdAt = resource.updatedAt = resource.__v = undefined;
+            
             return res.json({
-                message: 'Resource type created successfully',
+                message: 'Resource type created successfully..!!',
                 resource: resource
             });
         });
@@ -87,7 +96,8 @@ module.exports = {
 
     async UpdateResourceById(req, res) {
         var schema = Joi.object().keys({
-            resourceName: Joi.string().alphanum().min(3).max(30).required()
+            typeName: Joi.string().min(3).max(30).required(),
+            note: Joi.string().min(0).max(250)
         });
 
         const { error, value } = schema.validate(req.body);
@@ -95,56 +105,53 @@ module.exports = {
             return res.status(HttpStatus.BAD_REQUEST).json({ msg: error.details })
         }
 
-        var resource = await ResourceType.findOne({
-            resourceName: Helpers.firstUpper(req.body.resourceName)
-        });
-        if (resource) {
-            return res.status(HttpStatus.CONFLICT).json({
-                error: "Resource already exist in DB"
-            });
-        }
-
-        req.body.resourceName = Helpers.firstUpper(req.body.resourceName);
+        req.body.typeName = Helpers.firstUpper(req.body.typeName);
 
         resource = req.resourceType;
 
-        await ResourceType.findByIdAndUpdate({ _id: resource._id }, { $set: { resourceName: req.body.resourceName } }, { new: true }, (error, resource) => {
+        await ResourceType.findByIdAndUpdate(
+            { _id: resource._id }, 
+            { $set: { typeName: req.body.typeName, note: req.body.note } }, 
+            { new: true }, 
+            (error, resource) => {
             if (error) {
                 return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
-                    error: 'Error while changing the Resource name'
+                    error: 'Error while changing the Resource Type..!!'
                 });
             }
 
             if (!resource) {
                 return res.status(HttpStatus.BAD_REQUEST).json({
-                    error: 'Resource not exist in DB to update Resource name'
+                    error: 'Resource type does not exist in DB..!!'
                 });
             }
 
+            resource.createdAt = resource.updatedAt = resource.__v = undefined;
+
             return res.status(HttpStatus.OK).json({
-                message: 'Resource name updated successfully',
+                message: 'Resource type updated successfully..!!',
                 resource: resource
             });
         });
     },
 
     async DeleteResourceById(req, res) {
-        if (req.resourceType) {
+        if (req.resourceType.typeName) {
             await ResourceType.deleteOne({ _id: req.resourceType._id }).exec((error, output) => {
                 if (error) {
                     return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
-                        error: "Error while deleting Resource"
+                        error: "Error while deleting Resource Type..!!"
                     });
                 }
 
                 if (output.deletedCount != 1) {
                     return res.status(HttpStatus.BAD_REQUEST).json({
-                        error: "Unable to delete Resource"
+                        error: "Unable to delete Resource Type..!!"
                     });
                 }
 
                 return res.json({
-                    message: "Resource Deleted"
+                    message: "Resource Type deleted successfully..!!"
                 });
             });
         }

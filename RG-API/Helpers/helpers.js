@@ -8,5 +8,9 @@ module.exports = {
 
     lowerCase: str => {
         return str.toLowerCase();
+    },
+
+    allUpper: str => {
+        return str.toUpperCase();
     }
 };

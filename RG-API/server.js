@@ -8,7 +8,8 @@ const _ = require('lodash');
 // Routes Imports
 const auth = require('./routes/auth');
 const user = require('./routes/user');
-const resourceType = require('./routes/resourseType');
+const resourceType = require('./routes/resourceType');
+const productCategories = require('./routes/productCategories');
 
 // App Configurations
 const app = express();
@@ -21,7 +22,7 @@ mongoose.connect(process.env.DATABASE, {
 }).then(() => {
     console.log("DB CONNECTED..!!");
 }).catch(() => {
-    console.log("DB NOT CONNCETED..!!");
+    console.log("DB NOT CONNECTED..!!");
 })
 
 // Middlewares
@@ -34,6 +35,7 @@ app.use(cookieParser());
 app.use('/api/rgapp', auth);
 app.use('/api/rgapp', user);
 app.use('/api/rgapp', resourceType);
+app.use('/api/rgapp', productCategories);
 
 // Port Configuration for server
 const port = process.env.PORT || 3000;
