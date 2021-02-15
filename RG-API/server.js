@@ -11,6 +11,7 @@ const user = require('./routes/user');
 const resourceType = require('./routes/resourceType');
 const productCategories = require('./routes/productCategories');
 const client = require('./routes/client');
+const project = require('./routes/project');
 
 // App Configurations
 const app = express();
@@ -38,6 +39,7 @@ app.use('/api/rgapp', user);
 app.use('/api/rgapp', resourceType);
 app.use('/api/rgapp', productCategories);
 app.use('/api/rgapp', client);
+app.use('/api/rgapp', project);
 
 // Port Configuration for server
 const port = process.env.PORT || 3000;

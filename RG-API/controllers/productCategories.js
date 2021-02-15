@@ -154,7 +154,7 @@ module.exports = {
 
                 if (!productCategory) {
                     return res.status(HttpStatus.NOT_FOUND).json({
-                        error: 'Product category not found..!!'
+                        error: 'Product category not able to be update..!!'
                     });
                 }
 
