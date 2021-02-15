@@ -112,9 +112,25 @@ module.exports = {
             return res.status(HttpStatus.BAD_REQUEST).json({ msg: error.details });
         }
 
+        const prodCategory = await ProductCategories.findOne({
+            categoryName: Helpers.firstUpper(req.body.categoryName)
+        });
+        if (prodCategory) {
+            var prodCategoryOwners = JSON.parse(JSON.stringify(prodCategory.productOwnerId));
+
+            for (let i = 0; i < prodCategoryOwners.length; i++) {
+                if (prodCategoryOwners[i].ownerId === req.body.productOwnerId.ownerId) {
+                    return res.status(HttpStatus.CONFLICT).json({
+                        error: "Product owner already exist..!!"
+                    });
+                }
+            }
+        }
+
         req.body.categoryCode = Helpers.allUpper(req.body.categoryCode);
         req.body.categoryName = Helpers.firstUpper(req.body.categoryName);
-    
+        req.body.productOwnerId = req.productCategory.productOwnerId.concat(req.body.productOwnerId)
+
         productCategory = req.productCategory;
 
         await ProductCategories.findByIdAndUpdate(
@@ -124,10 +140,8 @@ module.exports = {
                     categoryName: req.body.categoryName, 
                     resourceTypeId: req.body.resourceTypeId,
                     categoryCode: req.body.categoryCode,
+                    productOwnerId: req.body.productOwnerId,
                     note: req.body.note
-                },
-                $push: {
-                    productOwnerId: req.body.productOwnerId
                 }
             },
             { new: true }, 
