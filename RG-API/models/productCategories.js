@@ -13,10 +13,12 @@ const productCategories = mongoose.Schema({
         type: ObjectId,
         ref: 'ResourceType'
     },
-    productOwnerId: {
-        type: [ObjectId],
-        ref: 'User'
-    },
+    productOwnerId: [{
+        ownerId: {
+            type: ObjectId,
+            ref: 'User'
+        }
+    }],
     categoryCode: {
         type: String,
         required: true,

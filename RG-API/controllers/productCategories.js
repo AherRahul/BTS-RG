@@ -33,7 +33,7 @@ module.exports = {
     },
 
     async GetAllProductCategories (req, res) {
-        await ProductCategories.find().exec((error, productCategory) => {
+        await ProductCategories.find().populate('productOwnerId.ownerId').populate('resourceTypeId').exec((error, productCategory) => {
             if (error) {
                 return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
                     error: 'Error while fetching product categories..!!'
@@ -59,7 +59,7 @@ module.exports = {
             categoryName: Joi.string().min(3).max(30).required(),
             categoryCode: Joi.string().min(3).max(30).required(),
             resourceTypeId: Joi.string().required(),
-            productOwnerId: Joi.string(),
+            productOwnerId: Joi.object(),
             note: Joi.string().min(0).max(250)
         });
 
@@ -79,10 +79,8 @@ module.exports = {
 
         req.body.categoryCode = Helpers.allUpper(req.body.categoryCode);
         req.body.categoryName = Helpers.firstUpper(req.body.categoryName);
-
+        
         var productCategory = new ProductCategories(req.body);
-
-        console.log(req.body);
 
         await productCategory.save((error, productCategory) => {
             if (error || !productCategory) {
@@ -104,7 +102,7 @@ module.exports = {
         var schema = Joi.object().keys({
             categoryName: Joi.string().min(3).max(30).required(),
             resourceTypeId: Joi.string().required(),
-            productOwnerId: Joi.string(),
+            productOwnerId: Joi.object(),
             categoryCode: Joi.string().min(3).max(30).required(),
             note: Joi.string().min(0).max(250)
         });
@@ -121,13 +119,17 @@ module.exports = {
 
         await ProductCategories.findByIdAndUpdate(
             {_id: productCategory._id},
-            {$set: { 
-                categoryName: req.body.categoryName, 
-                resourceTypeId: req.body.resourceTypeId,
-                productOwnerId: req.body.productOwnerId,
-                categoryCode: req.body.categoryCode,
-                note: req.body.note
-            }}, 
+            {
+                $set: { 
+                    categoryName: req.body.categoryName, 
+                    resourceTypeId: req.body.resourceTypeId,
+                    categoryCode: req.body.categoryCode,
+                    note: req.body.note
+                },
+                $push: {
+                    productOwnerId: req.body.productOwnerId
+                }
+            },
             { new: true }, 
             (error, productCategory) => {
                 if (error) {
