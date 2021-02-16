@@ -1,6 +1,6 @@
 require('dotenv').config();
 const Joi = require('@hapi/joi');
-const User = require('../models/userModel');
+const User = require('../models/user');
 const HttpStatus = require('http-status-codes');
 const Helpers = require('../Helpers/helpers');
 const jwt = require('jsonwebtoken');
@@ -22,9 +22,6 @@ exports.authCtrl = {
     async IsAuthenticated(req, res, next) {
 
         let checker = req.user && req.auth.data && req.user._id == req.auth.data._id;
-        
-        console.log(req.user);
-        console.log(req.auth.data);
 
         if (!checker) {
             return res.status(HttpStatus.UNAUTHORIZED).json({

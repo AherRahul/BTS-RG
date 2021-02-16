@@ -1,5 +1,3 @@
-const User = require('../models/userModel');
-
 module.exports = {
     firstUpper: username => {
         const name = username.toLowerCase();

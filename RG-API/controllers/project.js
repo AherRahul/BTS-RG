@@ -6,7 +6,7 @@ const Helpers = require('../Helpers/helpers');
 
 module.exports = {
     async ProjectByID (req, res, next, Id) {
-        await Project.findById(Id).exec((error, project) => {
+        await Project.findById(Id).populate('clientId').exec((error, project) => {
             if (error) {
                 return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
                     error: "Error while getting project..!!"
@@ -20,6 +20,7 @@ module.exports = {
             }
 
             project.createdAt = project.updatedAt = project.__v = undefined;
+            project.clientId.createdAt = project.clientId.updatedAt = project.clientId.__v = undefined;
 
             req.project = project;
             next();
@@ -28,7 +29,7 @@ module.exports = {
 
     async GetProjectById (req, res) {
         if (req.project) {
-            return res.status(HttpStatus.Ok).json(req.project);
+            return res.status(HttpStatus.OK).json(req.project);
         }
     },
 
@@ -48,6 +49,7 @@ module.exports = {
 
             for (let i = 0; i < project.length; i++) {
                 project[i].createdAt = project[i].updatedAt = project[i].__v = undefined;
+                project[i].clientId.createdAt = project[i].clientId.updatedAt = project[i].clientId.__v = undefined;
             }
 
             return res.status(HttpStatus.OK).json(project);
@@ -95,17 +97,15 @@ module.exports = {
                 });
             }
 
-            Client.findById(JSON.parse(JSON.stringify(project.clientId))).exec((error, proj) => {
-                //console.log(proj);
-                project.client = proj.clientName;
-
+            Client.findById(JSON.parse(JSON.stringify(project.clientId))).exec((error, client) => {
+                
                 project.createdAt = project.updatedAt = project.__v = undefined;
-
-                console.log(project);
+                client.createdAt = client.updatedAt = client.__v = undefined;
 
                 return res.status(HttpStatus.OK).json({
                     message: 'Project created successfully..!!',
-                    project: project
+                    project: project,
+                    client: client
                 });
             });
         });
@@ -117,12 +117,12 @@ module.exports = {
             projectCode: Joi.string().min(3).max(32).required(),
             clientId: Joi.string().required(),
             billable: Joi.boolean().required(),
-            devStart: Joi.Date(),
-            dr: Joi.Date(),
-            qa: Joi.Date(),
-            regression: Joi.Date(),
-            cr: Joi.Date(),
-            goLive: Joi.Date(),
+            devStart: Joi.date().iso().greater(Date.now()),
+            dr: Joi.date().iso().greater(Date.now()),
+            qa: Joi.date().iso().greater(Date.now()),
+            regression: Joi.date().iso().greater(Date.now()),
+            cr: Joi.date().iso().greater(Date.now()),
+            goLive: Joi.date().iso().greater(Date.now()),
             note: Joi.string().min(0).max(250)
         });
 
@@ -196,4 +196,4 @@ module.exports = {
             });
         }
     }
-} 
+}
