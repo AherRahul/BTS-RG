@@ -25,7 +25,7 @@ exports.authCtrl = {
 
         if (!checker) {
             return res.status(HttpStatus.UNAUTHORIZED).json({
-                error: 'ACCESS DENIED'
+                error: 'ACCESS DENIED..!!'
             });
         }
 

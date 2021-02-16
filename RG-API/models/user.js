@@ -4,14 +4,14 @@ const uuidv1 = require('uuid/v1');
 const { ObjectId } = mongoose.Schema;
 
 const userSchema = new mongoose.Schema({
-    firstname: {
+    firstName: {
         type: String,
         required: true,
         minlength: 3,
         maxlength: 32,
         trim: true
     },
-    lastname: {
+    lastName: {
         type: String,
         required: true,
         minlength: 3,
@@ -24,6 +24,74 @@ const userSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
+    encryPassword: {
+        type: String,
+        trim: true
+    },
+    // Hold the salt value
+    salt: String,
+    photoURL: {
+        type: String,
+        trim: true
+    },
+    Phone: {
+        type: Number,
+        minlength: 10,
+        maxlength: 10,
+        trim: true
+    },
+    department: {
+        type: String,
+        required: true,
+        minlength: 3,
+        maxlength: 32,
+        trim: true
+    },
+    jobTitle: {
+        type: String,
+        required: true,
+        minlength: 3,
+        maxlength: 32,
+        trim: true
+    },
+    isContractor: {
+        type: Boolean,
+        default: false,
+        required: true
+    },
+    resourceTypeId: [{
+        resourceType: {
+            type: ObjectId,
+            ref: "Resource"
+        }
+    }],
+    permission: {
+        type: Number,
+        default: 0,
+        required: true
+    },
+    timeZone: {
+        type: String,
+        trim: true
+    },
+    bookable: {
+        type: Boolean,
+        default: true,
+        required: true
+    },
+    skills: {
+        type: String,
+        minlength: 0,
+        maxlength: 250,
+        trim: true
+    },
+    status: {
+        type: Date
+    },
+    sendMeEmail: {
+        type: Boolean,
+        default: true
+    },
     resetPasswordToken: {
         type: String,
         trim: true
@@ -31,45 +99,6 @@ const userSchema = new mongoose.Schema({
     resetPasswordExpires: {
         type: Date
     },
-    encryPassword: {
-        type: String,
-        trim: true
-    },
-    // Hold the salt value
-    salt: String,
-    role: {
-        type: Number,
-        default: 0,
-        required: true
-    },
-    department: {
-        type: ObjectId,
-        ref: "Department"
-    },
-    sendMeEmail: {
-        type: Boolean,
-        default: true
-    },
-    city: {
-        type: String,
-        default: ''
-    },
-    country: {
-        type: String,
-        default: ''
-    },
-    isContractor: {
-        type: Boolean,
-        default: false
-    },
-    position: {
-        type: ObjectId,
-        ref: "Position"
-    },
-    resourceType: [{
-        type: ObjectId,
-        ref: "Resource"
-    }]
 }, { timestamps: true });
 
 userSchema.virtual("password")

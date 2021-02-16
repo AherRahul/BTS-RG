@@ -8,16 +8,16 @@ router.param('clientId', clientCtrl.ClientByID);
 
 // ROUTES
 // Create
-router.post('/client', clientCtrl.CreateClient);
+router.post('/client', authCtrl.IsAuthenticated, clientCtrl.CreateClient);
 
 // Read
-router.get('/client', clientCtrl.GetAllClient);
-router.get('/client/:clientId', clientCtrl.GetClientById);
+router.get('/client', authCtrl.IsAuthenticated, clientCtrl.GetAllClient);
+router.get('/client/:clientId', authCtrl.IsAuthenticated, clientCtrl.GetClientById);
 
 // Update
-router.put('/client/:clientId', clientCtrl.UpdateClientById);
+router.put('/client/:clientId', authCtrl.IsAuthenticated, clientCtrl.UpdateClientById);
 
 // Delete
-router.delete('/client/:clientId', clientCtrl.DeleteClientById);
+router.delete('/client/:clientId', authCtrl.IsAuthenticated, clientCtrl.DeleteClientById);
 
 module.exports = router;

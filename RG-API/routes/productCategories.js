@@ -4,20 +4,20 @@ const productCategoriesCtrl = require('../controllers/productCategories');
 const { IsSignedIn, authCtrl } = require('../controllers/auth');
 
 // PARAMS
-router.param('prodCategoryId', productCategoriesCtrl.ProductCategoriesByID);
+router.param('prodCategoryId', authCtrl.IsAuthenticated, productCategoriesCtrl.ProductCategoriesByID);
 
 // ROUTES
 // Create
-router.post('/prodCategory', productCategoriesCtrl.CreateProductCategories);
+router.post('/prodCategory', authCtrl.IsAuthenticated, productCategoriesCtrl.CreateProductCategories);
 
 // Read
-router.get('/prodCategory', productCategoriesCtrl.GetAllProductCategories);
-router.get('/prodCategory/:prodCategoryId', productCategoriesCtrl.GetProductCategoriesById);
+router.get('/prodCategory', authCtrl.IsAuthenticated, productCategoriesCtrl.GetAllProductCategories);
+router.get('/prodCategory/:prodCategoryId', authCtrl.IsAuthenticated, productCategoriesCtrl.GetProductCategoriesById);
 
 // Update
-router.put('/prodCategory/:prodCategoryId', productCategoriesCtrl.UpdateProductCategoriesById);
+router.put('/prodCategory/:prodCategoryId', authCtrl.IsAuthenticated, productCategoriesCtrl.UpdateProductCategoriesById);
 
 // Delete
-router.delete('/prodCategory/:prodCategoryId', productCategoriesCtrl.DeleteProductCategoriesById);
+router.delete('/prodCategory/:prodCategoryId', authCtrl.IsAuthenticated, productCategoriesCtrl.DeleteProductCategoriesById);
 
 module.exports = router;
