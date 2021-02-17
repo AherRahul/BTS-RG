@@ -92,3 +92,11 @@
 .schedule-group-editing.e-schedule .template-wrap .resource-image.laura {
     background-image: url('../../../assets/schedule/images/persona3.jpg');
 }
+
+.schedule-group-editing.e-schedule .template-wrap .resource-image.essty {
+    background-image: url('../../../assets/schedule/images/persona3.jpg');
+}
+
+.e-schedule .e-timeline-month-view .e-resource-left-td {
+    width: 230px !important;
+}

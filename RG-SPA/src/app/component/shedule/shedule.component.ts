@@ -163,23 +163,10 @@ export class SheduleComponent implements OnInit {
 
     public data: Object[] = <Object[]>extend([], resourceConferenceData, null, true);
     public selectedDate: Date = new Date(2021, 1, 1);
-    public currentView: View = 'WorkWeek';
+    public currentView: View = 'TimelineMonth';
     public resourceDataSource: Object[] = [
         { Text: 'Margaret', Id: 1, Color: '#1aaa55' },
         { Text: 'Robert', Id: 2, Color: '#357cd2' },
-        { Text: 'Laura', Id: 3, Color: '#7fa900' },
-        { Text: 'Laura', Id: 3, Color: '#7fa900' },
-        { Text: 'Laura', Id: 3, Color: '#7fa900' },
-        { Text: 'Laura', Id: 3, Color: '#7fa900' },
-        { Text: 'Laura', Id: 3, Color: '#7fa900' },
-        { Text: 'Laura', Id: 3, Color: '#7fa900' },
-        { Text: 'Laura', Id: 3, Color: '#7fa900' },
-        { Text: 'Laura', Id: 3, Color: '#7fa900' },
-        { Text: 'Laura', Id: 3, Color: '#7fa900' },
-        { Text: 'Laura', Id: 3, Color: '#7fa900' },
-        { Text: 'Laura', Id: 3, Color: '#7fa900' },
-        { Text: 'Laura', Id: 3, Color: '#7fa900' },
-        { Text: 'Laura', Id: 3, Color: '#7fa900' },
         { Text: 'Laura', Id: 3, Color: '#7fa900' }
     ];
     public group: GroupModel = { allowGroupEdit: true, resources: ['Conferences'] };

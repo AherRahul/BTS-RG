@@ -1636,7 +1636,7 @@ export let resourceConferenceData: Object[] = [
         Subject: 'Burning Man',
         StartTime: new Date(2021, 1, 1, 15, 0),
         EndTime: new Date(2021, 1, 1, 17, 0),
-        ConferenceId: [1, 2, 3]
+        ConferenceId: [1]
     }, {
         Id: 2,
         Subject: 'Data-Driven Economy',
