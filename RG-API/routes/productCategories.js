@@ -1,23 +1,24 @@
 const express = require('express');
 const router = express.Router();
 const productCategoriesCtrl = require('../controllers/productCategories');
-const { IsSignedIn, authCtrl } = require('../controllers/auth');
+const authHelper = require('../Helpers/AuthHelper');
+const { IsSignedIn } = require('../controllers/auth');
 
 // PARAMS
-router.param('prodCategoryId', authCtrl.IsAuthenticated, productCategoriesCtrl.ProductCategoriesByID);
+router.param('prodCategoryId', IsSignedIn, authHelper.VerifyToken, productCategoriesCtrl.ProductCategoriesByID);
 
 // ROUTES
 // Create
-router.post('/prodCategory', authCtrl.IsAuthenticated, productCategoriesCtrl.CreateProductCategories);
+router.post('/prodCategory', IsSignedIn, authHelper.VerifyToken, productCategoriesCtrl.CreateProductCategories);
 
 // Read
-router.get('/prodCategory', authCtrl.IsAuthenticated, productCategoriesCtrl.GetAllProductCategories);
-router.get('/prodCategory/:prodCategoryId', authCtrl.IsAuthenticated, productCategoriesCtrl.GetProductCategoriesById);
+router.get('/prodCategory', IsSignedIn, authHelper.VerifyToken, productCategoriesCtrl.GetAllProductCategories);
+router.get('/prodCategory/:prodCategoryId', IsSignedIn, authHelper.VerifyToken, productCategoriesCtrl.GetProductCategoriesById);
 
 // Update
-router.put('/prodCategory/:prodCategoryId', authCtrl.IsAuthenticated, productCategoriesCtrl.UpdateProductCategoriesById);
+router.put('/prodCategory/:prodCategoryId', IsSignedIn, authHelper.VerifyToken, productCategoriesCtrl.UpdateProductCategoriesById);
 
 // Delete
-router.delete('/prodCategory/:prodCategoryId', authCtrl.IsAuthenticated, productCategoriesCtrl.DeleteProductCategoriesById);
+router.delete('/prodCategory/:prodCategoryId', IsSignedIn, authHelper.VerifyToken, productCategoriesCtrl.DeleteProductCategoriesById);
 
 module.exports = router;

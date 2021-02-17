@@ -81,7 +81,8 @@ module.exports = {
         await client.save((error, client) => {
             if (error || !client) {
                 return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
-                    error: 'Unable to save client..!!'
+                    error: error.message,
+                    message: 'Unable to save client..!!'
                 });
             }
 

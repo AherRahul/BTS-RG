@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const userCtrl = require('../controllers/user');
-const { IsSignedIn, authCtrl } = require('../controllers/auth');
+const authHelper = require('../Helpers/AuthHelper');
+const { IsSignedIn } = require('../controllers/auth');
 
 // PARAMS
 router.param('userId', userCtrl.UserById);
@@ -15,17 +16,17 @@ router.param('token', userCtrl.UserByToken);
 router.post('/resetpassword', userCtrl.ResetPassword);
 
 // Read
-router.get('/users/:adminId', IsSignedIn, authCtrl.IsAuthenticated, authCtrl.IsAdmin, userCtrl.getAllUsers);
-router.get('/user/:userId', IsSignedIn, authCtrl.IsAuthenticated, userCtrl.getUserById);
-router.get('/user/:emailId', IsSignedIn, authCtrl.IsAuthenticated, userCtrl.getUserByEmailId);
+router.get('/users/:adminId', IsSignedIn, authHelper.VerifyToken, userCtrl.getAllUsers);
+router.get('/user/:userId', IsSignedIn, authHelper.VerifyToken, userCtrl.getUserById);
+router.get('/user/:emailId', IsSignedIn, authHelper.VerifyToken, userCtrl.getUserByEmailId);
 
 // Update
-router.put('/change-password/:userId', IsSignedIn, authCtrl.IsAuthenticated, userCtrl.ChangePassword);
-router.put('/user/:userId/:adminId', IsSignedIn, authCtrl.IsAuthenticated, authCtrl.IsAdmin, userCtrl.UpdateUser);
+router.put('/change-password/:userId', IsSignedIn, authHelper.VerifyToken, userCtrl.ChangePassword);
+router.put('/user/:userId/:adminId', IsSignedIn, authHelper.VerifyToken, userCtrl.UpdateUser);
 router.put('/reset/:token', userCtrl.Reset);
 
 // Delete
-router.delete('/user/:userId/:adminId', IsSignedIn, authCtrl.IsSuperAdmin, userCtrl.deleteUser);
+router.delete('/user/:userId/:adminId', IsSignedIn, userCtrl.deleteUser);
 
 
 

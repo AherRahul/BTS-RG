@@ -1,23 +1,24 @@
 const express = require('express');
 const router = express.Router();
 const resourceTypeCtrl = require('../controllers/resourceType');
-const { IsSignedIn, authCtrl } = require('../controllers/auth');
+const authHelper = require('../Helpers/AuthHelper');
+const { IsSignedIn } = require('../controllers/auth');
 
 // PARAMS
-router.param('resourceId', authCtrl.IsAuthenticated, resourceTypeCtrl.ResourceByID);
+router.param('resourceId', IsSignedIn, authHelper.VerifyToken, resourceTypeCtrl.ResourceByID);
 
 // ROUTES
 // Create
-router.post('/resourceType', authCtrl.IsAuthenticated, resourceTypeCtrl.CreateResource);
+router.post('/resourceType', IsSignedIn, authHelper.VerifyToken, resourceTypeCtrl.CreateResource);
 
 // Read
-router.get('/resourceType', authCtrl.IsAuthenticated, resourceTypeCtrl.GetAllResources);
-router.get('/resourceType/:resourceId', authCtrl.IsAuthenticated, resourceTypeCtrl.GetResourceById);
+router.get('/resourceType', IsSignedIn, authHelper.VerifyToken, resourceTypeCtrl.GetAllResources);
+router.get('/resourceType/:resourceId', IsSignedIn, authHelper.VerifyToken, resourceTypeCtrl.GetResourceById);
 
 // Update
-router.put('/resourceType/:resourceId', authCtrl.IsAuthenticated, resourceTypeCtrl.UpdateResourceById);
+router.put('/resourceType/:resourceId', IsSignedIn, authHelper.VerifyToken, resourceTypeCtrl.UpdateResourceById);
 
 // Delete
-router.delete('/resourceType/:resourceId', authCtrl.IsAuthenticated, resourceTypeCtrl.DeleteResourceById);
+router.delete('/resourceType/:resourceId', IsSignedIn, authHelper.VerifyToken, resourceTypeCtrl.DeleteResourceById);
 
 module.exports = router;

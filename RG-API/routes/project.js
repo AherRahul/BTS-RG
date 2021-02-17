@@ -1,23 +1,24 @@
 const express = require('express');
 const router = express.Router();
 const projectCtrl = require('../controllers/project');
-const { IsSignedIn, authCtrl } = require('../controllers/auth');
+const authHelper = require('../Helpers/AuthHelper');
+const { IsSignedIn } = require('../controllers/auth');
 
 // PARAMS
-router.param('projectId', authCtrl.IsAuthenticated, projectCtrl.ProjectByID);
+router.param('projectId', IsSignedIn, authHelper.VerifyToken, projectCtrl.ProjectByID);
 
 // ROUTES
 // Create
-router.post('/project', authCtrl.IsAuthenticated, projectCtrl.CreateProject);
+router.post('/project', IsSignedIn, authHelper.VerifyToken, projectCtrl.CreateProject);
 
 // Read
-router.get('/project', authCtrl.IsAuthenticated, projectCtrl.GetAllProject);
-router.get('/project/:projectId', authCtrl.IsAuthenticated, projectCtrl.GetProjectById);
+router.get('/project', IsSignedIn, authHelper.VerifyToken, projectCtrl.GetAllProject);
+router.get('/project/:projectId', IsSignedIn, authHelper.VerifyToken, projectCtrl.GetProjectById);
 
 // Update
-router.put('/project/:projectId', authCtrl.IsAuthenticated, projectCtrl.UpdateProjectById);
+router.put('/project/:projectId', IsSignedIn, authHelper.VerifyToken, projectCtrl.UpdateProjectById);
 
 // Delete
-router.delete('/project/:projectId', authCtrl.IsAuthenticated, projectCtrl.DeleteProjectById);
+router.delete('/project/:projectId', IsSignedIn, authHelper.VerifyToken, projectCtrl.DeleteProjectById);
 
 module.exports = router;

@@ -344,7 +344,7 @@ module.exports = {
 
     // get all the user 
     // Only Admin can access
-    async getAllUsers(req, res) {
+    async getAllUsers (req, res) {
         await User.find().exec((error, users) => {
             if (error) {
                 return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({

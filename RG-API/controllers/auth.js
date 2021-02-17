@@ -18,20 +18,6 @@ exports.IsSignedIn = expressJwt({
 
 exports.authCtrl = {
 
-    // Middleware to check if user is authenticated or not
-    async IsAuthenticated(req, res, next) {
-
-        let checker = req.user && req.auth.data && req.user._id == req.auth.data._id;
-
-        if (!checker) {
-            return res.status(HttpStatus.UNAUTHORIZED).json({
-                error: 'ACCESS DENIED..!!'
-            });
-        }
-
-        next();
-    },
-
     // Middleware to check if user is SuperAdmin or not
     async IsSuperAdmin(req, res, next) {
 
@@ -97,9 +83,19 @@ exports.authCtrl = {
     async registerUser(req, res) {
 
         var schema = Joi.object().keys({
-            firstname: Joi.string().alphanum().min(3).max(30).required(),
-            lastname: Joi.string().alphanum().min(3).max(30).required(),
-            email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } })
+            firstName: Joi.string().alphanum().min(3).max(30).required(),
+            lastName: Joi.string().alphanum().min(3).max(30).required(),
+            email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }),
+            phone: Joi.number().maxLength(10).minlength(10),
+            department: Joi.string().min(3).max(15).require(),
+            jobTitle: Joi.string().min(30).max(15).required(),
+            isContractor: Joi.boolean(),
+            resourceTypeId: Joi.object(),
+            permission: Joi.number().min(0).max(8).required(),
+            timeZone: Joi.string(),
+            bookable: Joi.boolean().required(),
+            skills: Joi.string().min(0).max(250).require(),
+            sendMeMail: Joi.boolean()
         });
 
         const { error, value } = schema.validate(req.body);
@@ -116,8 +112,8 @@ exports.authCtrl = {
                 .json({ message: 'Email already exist' });
         }
 
-        req.body.firstname = Helpers.firstUpper(req.body.firstname);
-        req.body.lastname = Helpers.firstUpper(req.body.lastname);
+        req.body.firstName = Helpers.firstUpper(req.body.firstName);
+        req.body.lastName = Helpers.firstUpper(req.body.lastName);
         req.body.email = Helpers.lowerCase(req.body.email);
         req.body.password = "bts@123";
 
@@ -235,7 +231,7 @@ exports.authCtrl = {
                 });
             }
 
-            user.salt = user.encryPassword = user.createdAt = user.updatedAt = undefined;
+            user.salt = user.encryPassword = user.createdAt = user.updatedAt = user.__v = undefined;
 
             const token = jwt.sign({ data: user }, process.env.SECRETE, {
                 expiresIn: '5h'
