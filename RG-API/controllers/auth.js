@@ -109,7 +109,7 @@ exports.authCtrl = {
         if (userEmail) {
             return res
                 .status(HttpStatus.CONFLICT)
-                .json({ message: 'Email already exist' });
+                .json({ message: 'User already exist' });
         }
 
         req.body.firstName = Helpers.firstUpper(req.body.firstName);
