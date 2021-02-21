@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const crypto = require('crypto');
-const uuidv1 = require('uuid/v1');
+const { v1: uuidv1 } = require('uuid');
 const { ObjectId } = mongoose.Schema;
 
 const userSchema = new mongoose.Schema({
@@ -99,6 +99,10 @@ const userSchema = new mongoose.Schema({
     resetPasswordExpires: {
         type: Date
     },
+    isEmailActivated: {
+        type: Boolean,
+        default: false
+    }
 }, { timestamps: true });
 
 userSchema.virtual("password")
