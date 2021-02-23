@@ -94,14 +94,9 @@ exports.authCtrl = {
             permission: Joi.number().min(0).max(8).required(),
             timeZone: Joi.string(),
             bookable: Joi.boolean().required(),
-<<<<<<< HEAD
             skills: Joi.string().min(0).max(250).require(),
             sendMeMail: Joi.boolean(),
             isSetByAdmin: Joi.boolean().default(true),
-=======
-            skills: Joi.string().min(0).max(250).required(),
-            sendMeMail: Joi.boolean()
->>>>>>> a8df479d3ef66fdbaf22de5a690ebd8c2d2ab3f4
         });
 
         const { error, value } = schema.validate(req.body);
@@ -175,11 +170,7 @@ exports.authCtrl = {
                             subject: 'BTS Communicate Activate Email',
                             text: 'You are receiving this because you have to set the password for your account.\n\n' +
                                 'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
-<<<<<<< HEAD
                                 'http://localhost:5050/api/rgapp/reset/' + passToken + '\n\n' +
-=======
-                                'http://localhost:5050/api/rgapp/activateEmail/' + passtoken + '\n\n' +
->>>>>>> a8df479d3ef66fdbaf22de5a690ebd8c2d2ab3f4
                                 'If you did not request this, please ignore this email and your password will remain unchanged.\n\n' +
                                 'Thanks & Regards,\nBTS Admin'
                         };

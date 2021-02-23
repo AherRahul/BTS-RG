@@ -99,16 +99,10 @@ const userSchema = new mongoose.Schema({
     resetPasswordExpires: {
         type: Date
     },
-<<<<<<< HEAD
     isSetByAdmin: {
         type: Boolean,
         default: true,
         required: true
-=======
-    isEmailActivated: {
-        type: Boolean,
-        default: false
->>>>>>> a8df479d3ef66fdbaf22de5a690ebd8c2d2ab3f4
     }
 }, { timestamps: true });
 
