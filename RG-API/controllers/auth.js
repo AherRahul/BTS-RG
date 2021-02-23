@@ -95,7 +95,8 @@ exports.authCtrl = {
             timeZone: Joi.string(),
             bookable: Joi.boolean().required(),
             skills: Joi.string().min(0).max(250).require(),
-            sendMeMail: Joi.boolean()
+            sendMeMail: Joi.boolean(),
+            isSetByAdmin: Joi.boolean().default(true),
         });
 
         const { error, value } = schema.validate(req.body);
@@ -115,42 +116,45 @@ exports.authCtrl = {
         req.body.firstName = Helpers.firstUpper(req.body.firstName);
         req.body.lastName = Helpers.firstUpper(req.body.lastName);
         req.body.email = Helpers.lowerCase(req.body.email);
-        req.body.password = "bts@123";
+        req.body.department = Helpers.firstUpper(req.body.department);        
+        req.body.jobTitle = Helpers.firstUpper(req.body.jobTitle);
+        //req.body.password = "bts@123";
 
         var user = new User(req.body);
         // Saving User To DB
         await user.save((error, user) => {
+
             if (error || !user) {
                 return res
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .json({ message: 'Error occurred' });
+                    .json({ message: 'Error occurred during user save..!!' });
             }
 
             if (user) {
-                user.createdAt = user.updatedAt = undefined;
 
-                const token = jwt.sign({ data: user }, process.env.SECRETE, {
+                let { _id, firstName, lastName, email, permission, isSetByAdmin } = user;
+                const userToSave = { _id, firstName, lastName, email, permission, isSetByAdmin };
+
+                const token = jwt.sign( { data: userToSave }, process.env.SECRETE, {
                     expiresIn: '5h'
                 });
-
-                res.cookie('auth', token);
 
                 async.waterfall([
                     function(done) {
                         crypto.randomBytes(20, function(err, buf) {
-                            var passtoken = buf.toString('hex');
-                            done(err, passtoken);
+                            var passToken = buf.toString('hex');
+                            done(err, passToken);
                         });
                     },
-                    function(passtoken, done) {
-                        user.resetPasswordToken = passtoken;
+                    function(passToken, done) {
+                        user.resetPasswordToken = passToken;
                         user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
 
                         user.save(function(err) {
                             done(err, token, user);
                         });
                     },
-                    function(passtoken, user, done) {
+                    function(passToken, user, done) {
                         var smtpTransport = nodemailer.createTransport({
                             service: 'Gmail',
 
@@ -166,14 +170,16 @@ exports.authCtrl = {
                             subject: 'BTS Communicate Password Reset',
                             text: 'You are receiving this because you have to set the password for your account.\n\n' +
                                 'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
-                                'http://localhost:5050/api/rgapp/reset/' + passtoken + '\n\n' +
+                                'http://localhost:5050/api/rgapp/reset/' + passToken + '\n\n' +
                                 'If you did not request this, please ignore this email and your password will remain unchanged.\n\n' +
                                 'Thanks & Regards,\nBTS Admin'
                         };
+
                         smtpTransport.sendMail(mailOptions, function(error, info) {
                             req.flash('success', 'An e-mail has been sent to ' + user.email + ' with further instructions.');
                             done(err, 'done');
                         });
+                        
                     }
                 ], function(err) {
                     if (err) {

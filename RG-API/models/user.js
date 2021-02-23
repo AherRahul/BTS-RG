@@ -99,6 +99,11 @@ const userSchema = new mongoose.Schema({
     resetPasswordExpires: {
         type: Date
     },
+    isSetByAdmin: {
+        type: Boolean,
+        default: true,
+        required: true
+    }
 }, { timestamps: true });
 
 userSchema.virtual("password")
