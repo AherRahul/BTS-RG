@@ -4,6 +4,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule, JsonpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './component/nav/nav.component';
@@ -27,6 +29,7 @@ import { ResourcesComponent } from './component/resources/resources.component';
 import { ProjectsComponent } from './component/projects/projects.component';
 import { ClientComponent } from './component/client/client.component';
 import { ReportsComponent } from './component/reports/reports.component';
+import { EditProfileComponent } from './component/edit-profile/edit-profile.component';
 
 @NgModule({
    declarations: [
@@ -38,7 +41,8 @@ import { ReportsComponent } from './component/reports/reports.component';
       ResourcesComponent,
       ProjectsComponent,
       ClientComponent,
-      ReportsComponent
+      ReportsComponent,
+      EditProfileComponent
    ],
    imports: [
       BrowserModule,
@@ -67,6 +71,8 @@ import { ReportsComponent } from './component/reports/reports.component';
       RichTextEditorAllModule,
       HttpClientModule,
       AppRoutingModule,
+      BrowserAnimationsModule,
+      BsDropdownModule.forRoot(),
       // tslint:disable-next-line: deprecation
       JsonpModule
    ],

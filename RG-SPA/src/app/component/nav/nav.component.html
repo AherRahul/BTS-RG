@@ -35,25 +35,23 @@
             <li class="nav-item nav-custom" routerLink='reports'>
                 <a class="nav-link ">Reports</a>
             </li>
-            <li class="nav-item nav-custom" (click)="logout()">
-                <a class="nav-link ">Logout</a>
-            </li>
         </ul>
 
         <div class="dropdown" dropdown *ngIf="isLoggedIn()">
-            <span class="mr-1">
+            <span class="">
               <img class="user-img" src="{{photoURL || '../../../../assets/original.png'}}" alt="" >
             </span>
 
             <a class="dropdown-toggle text-light" dropdownToggle>
-              Welcome 
-          </a>
+                Welcome Rahul
+            </a>
 
-            <div class="dropdown-menu mt-3" *dropdownMenu>
-                <a class="dropdown-item"><i class="fa fa-user"></i> Edit Profile</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item"><i class="fa fa-sign-out"></i> Logout</a>
+            <div class="dropdown-menu ml-4 mt-1" *dropdownMenu>
+                <a class="dropdown-item" data-toggle="modal" data-target=".bd-example-modal-lg1"><i class="fa fa-user"></i> Edit Profile</a>
+                <a class="dropdown-item"  (click)="logout()"><i class="fa fa-sign-out" ></i> Logout</a>
             </div>
         </div>
     </div>
 </nav>
+
+<app-edit-profile></app-edit-profile>

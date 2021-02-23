@@ -44,11 +44,6 @@ export const appRoutes: Routes = [
         canActivate: [AuthGuard]
     },
     {
-        path: 'schedule',
-        component: SheduleComponent,
-        canActivate: [AuthGuard]
-    },
-    {
         path: '**',
         redirectTo: '',
         pathMatch: 'full'

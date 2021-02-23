@@ -11,6 +11,7 @@ export class NavComponent implements OnInit {
 
   appName = 'BTS RG';
   photoURL: string;
+  currentUser = { text: 'Rahul Aher', id: 4, color: '#04ccf9', role: 'Developer' };
 
   constructor(
     private router: Router,

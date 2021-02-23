@@ -33,6 +33,7 @@ app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 app.use(cookieParser());
 
+
 // Routes
 app.use('/api/rgapp', auth);
 app.use('/api/rgapp', user);

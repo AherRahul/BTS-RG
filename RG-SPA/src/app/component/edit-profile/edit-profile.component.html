@@ -1,0 +1,46 @@
+
+<div class="modal fade bd-example-modal-lg1" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card border-secondary mb-3">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-1 mr-5" >
+                                <span class="mr-1">
+                                    <img class="user-img" src="{{photoURL || '../../../../assets/original.png'}}" alt="" style="max-height: 80px; border-radius: 40px;" >
+                                </span>
+                            </div>
+                            <div class="col-10">
+                                <strong>{{currentUser.text}}</strong>
+                                <br>
+                                <small>{{currentUser.role}}</small>
+                                <br>
+                                <small><b>Last login:</b> 10 Feb 2021, 08:00 PM</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="tab-pane fade active show pt-3" id="general">
+                            <span><strong>Job Title:</strong> {{currentUser.role}}</span><br>
+                            <span><strong>Permissions:</strong> Custom</span><br>
+                            <span><strong>Time Zone:</strong> (GMT+5:30) Mumbai</span><br>
+                            <span><strong>Phone:</strong></span><br>
+                            <span><strong>Contractor/Employee:</strong> Employee</span><br>
+                            <span><strong>Department:</strong> Production</span><br>
+                            <span><strong>Resource Type:</strong> Isomer | Pulse</span><br>
+                            <span><strong>Skills:</strong></span><br>
+                            <span><strong>Bookable:</strong> Yes</span><br>
+                            <span><strong>Notes:</strong></span><br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

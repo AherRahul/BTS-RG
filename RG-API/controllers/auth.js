@@ -94,14 +94,16 @@ exports.authCtrl = {
             permission: Joi.number().min(0).max(8).required(),
             timeZone: Joi.string(),
             bookable: Joi.boolean().required(),
-            skills: Joi.string().min(0).max(250).require(),
+            skills: Joi.string().min(0).max(250),
             sendMeMail: Joi.boolean(),
             isSetByAdmin: Joi.boolean().default(true),
         });
 
         const { error, value } = schema.validate(req.body);
         if (error && error.details) {
-            return res.status(HttpStatus.BAD_REQUEST).json({ msg: error.details })
+            return res.status(HttpStatus.BAD_REQUEST).json({
+                 msg: error.details 
+            });
         }
 
         const userEmail = await User.findOne({
@@ -110,24 +112,27 @@ exports.authCtrl = {
         if (userEmail) {
             return res
                 .status(HttpStatus.CONFLICT)
-                .json({ message: 'User already exist' });
+                .json({ 
+                    message: 'User already exist' 
+                });
         }
 
         req.body.firstName = Helpers.firstUpper(req.body.firstName);
         req.body.lastName = Helpers.firstUpper(req.body.lastName);
         req.body.email = Helpers.lowerCase(req.body.email);
-        req.body.department = Helpers.firstUpper(req.body.department);        
+        req.body.department = Helpers.firstUpper(req.body.department);
         req.body.jobTitle = Helpers.firstUpper(req.body.jobTitle);
         //req.body.password = "bts@123";
 
         var user = new User(req.body);
+
         // Saving User To DB
         await user.save((error, user) => {
 
             if (error || !user) {
                 return res
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .json({ message: 'Error occurred during user save..!!' });
+                    .json({ message: 'Error occurred during user save..!!', error: error});
             }
 
             if (user) {
@@ -140,12 +145,14 @@ exports.authCtrl = {
                 });
 
                 async.waterfall([
+
                     function(done) {
                         crypto.randomBytes(20, function(err, buf) {
                             var passToken = buf.toString('hex');
                             done(err, passToken);
                         });
                     },
+
                     function(passToken, done) {
                         user.resetPasswordToken = passToken;
                         user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
@@ -154,7 +161,9 @@ exports.authCtrl = {
                             done(err, token, user);
                         });
                     },
+
                     function(passToken, user, done) {
+
                         var smtpTransport = nodemailer.createTransport({
                             service: 'Gmail',
 
@@ -179,8 +188,8 @@ exports.authCtrl = {
                             req.flash('success', 'An e-mail has been sent to ' + user.email + ' with further instructions.');
                             done(err, 'done');
                         });
-                        
                     }
+
                 ], function(err) {
                     if (err) {
                         return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
