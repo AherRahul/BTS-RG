@@ -10,7 +10,7 @@
     "author": "Rahul Aher",
     "license": "ISC",
     "dependencies": {
-        "@hapi/joi": "^17.1.1",
+        "@hapi/joi": "^15.0.3",
         "async": "^3.2.0",
         "bcryptjs": "^2.4.3",
         "cloudinary": "^1.21.0",
@@ -22,7 +22,7 @@
         "http-status-codes": "^1.4.0",
         "joi-json": "^4.0.0",
         "jsonwebtoken": "^8.5.1",
-        "lodash": "^4.17.15",
+        "lodash": "^4.17.21",
         "mongoose": "^5.9.14",
         "nodemailer": "^6.4.6",
         "nodemon": "^2.0.4",

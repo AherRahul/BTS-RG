@@ -14,6 +14,7 @@ router.param('token', userCtrl.UserByToken);
 
 // Create
 router.post('/resetpassword', userCtrl.ResetPassword);
+router.post('/setPassword', userCtrl.SetPassword);
 
 // Read
 router.get('/users/:adminId', IsSignedIn, authHelper.VerifyToken, userCtrl.getAllUsers);
@@ -23,7 +24,7 @@ router.get('/user/:emailId', IsSignedIn, authHelper.VerifyToken, userCtrl.getUse
 // Update
 router.put('/change-password/:userId', IsSignedIn, authHelper.VerifyToken, userCtrl.ChangePassword);
 router.put('/user/:userId/:adminId', IsSignedIn, authHelper.VerifyToken, userCtrl.UpdateUser);
-router.put('/reset/:token', userCtrl.Reset);
+router.get('/activateEmail/:token', userCtrl.ActivateEmail);
 
 // Delete
 router.delete('/user/:userId/:adminId', IsSignedIn, userCtrl.deleteUser);
