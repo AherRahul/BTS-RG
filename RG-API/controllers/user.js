@@ -7,6 +7,7 @@ const jwt = require('jsonwebtoken');
 const async = require("async");
 var crypto = require("crypto");
 var nodemailer = require("nodemailer");
+const path = require('path');
 
 module.exports = {
 
@@ -316,6 +317,90 @@ module.exports = {
                 message: 'User password updated successfully'
             });
         });
+    },
+
+    // Activate the email of newly registered user
+    async ActivateEmail(req, res) {
+        await User.findByIdAndUpdate({ _id: req.user._id }, { $set: { isEmailActivated: true } }, { new: true }, (error, user) => {
+            if (error) {
+                return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
+                    error: 'Error while activating email'
+                });
+            }
+
+            if (!user) {
+                return res.status(HttpStatus.BAD_REQUEST).json({
+                    error: 'Invalid token'
+                });
+            }
+
+            // if current password is default password, display reset form
+            if (user.authenticate("bts@123")) {
+                res.cookie('token', req.params['token']);
+                res.sendFile(path.join(__dirname.replace(path.basename(__dirname), '') + '/Helpers/setPassword.html'));
+            } else {
+                res.status(HttpStatus.OK).json({
+                    'message': 'Password already set'
+                })
+            }
+            
+        });
+    },
+
+    async SetPassword(req, res) {
+        var password = req.body.password;
+        var userFromToken = jwt.verify(req.cookies['token'], process.env.SECRETE, (err, decoded) => {
+            if (err) {
+                if (err.expiredAt < new Date()) {
+                    return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
+                        message: 'Token has expired',
+                        token: null
+                    });
+                }
+                next();
+            }
+            return decoded.data;
+        });
+
+        var user = User.findById({_id: userFromToken._id}, (error, user) => {
+            if (error) {
+                return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
+                    error: 'Internal Server Error, User not found.'
+                });
+            }
+
+            user.encryPassword = user.securePassword(password);
+            user.save((error, user) => {
+                if (error) {
+                return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
+                    error: 'Internal Server Error, User not found.'
+                    });
+                }
+
+                res.status(HttpStatus.OK).json({
+                'message': 'Password Set Successfully!'
+                })
+            });
+        })
+
+        // this does not work on virtual attributes
+        // await User.findByIdAndUpdate({ _id: user._id }, { $set: { encryPassword: user.securePassword(password) } }, { new: true }, (error, user) => {
+        //     if (error) {
+        //         return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
+        //             error: 'Internal Server Error'
+        //         });
+        //     }
+
+        //     if (!user) {
+        //         return res.status(HttpStatus.BAD_REQUEST).json({
+        //             error: 'Invalid token'
+        //         });
+        //     }
+
+        //     res.status(HttpStatus.OK).json({
+        //         'message': 'Password Set Successfully!'
+        //     })
+        // });
     },
 
     // deleting the user find by id 
