@@ -5,7 +5,7 @@ const authHelper = require('../Helpers/AuthHelper');
 const { IsSignedIn } = require('../controllers/auth');
 
 // PARAMS
-router.param('projectId', IsSignedIn, authHelper.VerifyToken, projectCtrl.ProjectByID);
+router.param('projectId', projectCtrl.ProjectByID);
 
 // ROUTES
 // Create

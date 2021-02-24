@@ -5,7 +5,7 @@ const authHelper = require('../Helpers/AuthHelper');
 const { IsSignedIn } = require('../controllers/auth');
 
 // PARAMS
-router.param('prodCategoryId', IsSignedIn, authHelper.VerifyToken, productCategoriesCtrl.ProductCategoriesByID);
+router.param('prodCategoryId', productCategoriesCtrl.ProductCategoriesByID);
 
 // ROUTES
 // Create
