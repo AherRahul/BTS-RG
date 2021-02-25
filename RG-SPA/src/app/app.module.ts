@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule, JsonpModule } from '@angular/http';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -30,6 +30,8 @@ import { ProjectsComponent } from './component/projects/projects.component';
 import { ClientComponent } from './component/client/client.component';
 import { ReportsComponent } from './component/reports/reports.component';
 import { EditProfileComponent } from './component/edit-profile/edit-profile.component';
+import { TokenInterceptor } from './_services/token-interceptor';
+import { ProjectService } from './_services/project.service';
 
 @NgModule({
    declarations: [
@@ -78,7 +80,13 @@ import { EditProfileComponent } from './component/edit-profile/edit-profile.comp
    ],
    providers: [
       AlertifyService,
-      AuthService
+      AuthService,
+      ProjectService,
+      {
+         provide: HTTP_INTERCEPTORS,
+         useClass: TokenInterceptor,
+         multi: true
+      }
    ],
    bootstrap: [
       AppComponent

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ProjectService } from 'src/app/_services/project.service';
 
 @Component({
   selector: 'app-projects',
@@ -7,68 +8,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProjectsComponent implements OnInit {
 
-  currentProject: any = {};
-  segregateProjectList = [];
-  projectList = [
-    {
-      projectName: 'Microsoft ITO Phase 3',
-      projectCode: 'X016',
-      clientName: 'Microsoft',
-      billable: 'Yes',
-      goLive: '15 July 2021',
-      cr: '2021',
-      dr: '26 June 2021',
-      devStart: '17 June 2021',
-      qa: '08 July 2021',
-      notes: '',
-      colorCode: '#fc8e89'
-    },
-    {
-      projectName: 'F5 Network Sprint 3',
-      projectCode: 'FN63',
-      clientName: 'F5 Network',
-      billable: 'Yes',
-      goLive: '15 July 2021',
-      cr: '2021',
-      dr: '26 June 2021',
-      devStart: '17 June 2021',
-      qa: '08 July 2021',
-      notes: '',
-      colorCode: '#a6fa85'
-    },
-    {
-      projectName: 'Abbot MBS',
-      projectCode: 'AX80',
-      clientName: 'Abbot',
-      billable: 'Yes',
-      goLive: '15 July 2021',
-      cr: '2021',
-      dr: '26 June 2021',
-      devStart: '17 June 2021',
-      qa: '08 July 2021',
-      notes: '',
-      colorCode: '#a4bcff'
-    },
-    {
-      projectName: 'Salesforce_LFS (BA1)_Post pilot',
-      projectCode: 'SB44',
-      clientName: 'Salesforce',
-      billable: 'Yes',
-      goLive: '15 July 2021',
-      cr: '2021',
-      dr: '26 June 2021',
-      devStart: '17 June 2021',
-      qa: '08 July 2021',
-      notes: '',
-      colorCode: '#fade4d'
+  currentProject: any = {
+    clientId: {
+      clientColorCode: ""
     }
-  ]
+  };
+  segregateProjectList = [];
+  projectList = []
   
-  constructor() { }
+  constructor ( private projectService: ProjectService ) { }
 
   ngOnInit(): void {
-    this.sortProject();
-    this.segregateProject();
+    this.projectService.getAllProjects().subscribe(projects => {
+      this.projectList = projects;
+      
+      this.sortProject();
+      this.segregateProject();
+    });
   }
 
   sortProject(): void {
@@ -102,5 +58,7 @@ export class ProjectsComponent implements OnInit {
 
   modePopUp(project){
     this.currentProject = project;
+    console.log(this.currentProject);
+    
   }
 }

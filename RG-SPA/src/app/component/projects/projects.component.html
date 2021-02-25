@@ -7,12 +7,12 @@
 
             <div class="row">
                 <div class="col-3 p-3"  *ngFor="let project of projectRow.projects"  data-toggle="modal" data-target=".bd-example-modal-lg" (click)='modePopUp(project)'>
-                    <div class="toast show p-2" role="alert" aria-live="assertive" aria-atomic="true" style="border-left: solid 4px;" [style.border-color]="project.colorCode">
+                    <div class="toast show p-2" role="alert" aria-live="assertive" aria-atomic="true" style="border-left: solid 4px;" [style.border-color]="project.clientId.clientColorCode">
                         <div class="row">               
                             <div class="col-12 pt-1">
                                 <strong>{{project.projectName}}</strong>
                                 <br>
-                                <small>({{project.projectCode}})</small>
+                                <small>{{project.clientId.clientName}} ({{project.projectCode}})</small>
                             </div>
                         </div>
                     </div>
@@ -49,15 +49,15 @@
                     <div class="card-body">
                         <div class="pt-3" id="general">
                             <span><strong>Project code:</strong> {{currentProject.projectCode}}</span><br>
-                            <span><strong>Color Code: </strong> </span><span class="colorbox" [style.background-color]="currentProject.colorCode"></span><br>
-                            <span><strong>Client:</strong> {{currentProject.clientName}}</span><br>
+                            <span><strong>Color Code: </strong> </span><span class="colorbox" [style.background-color]="currentProject.clientId.clientColorCode"></span><br>
+                            <span><strong>Client:</strong> {{currentProject.clientId.clientName}}</span><br>
                             <span><strong>Billable:</strong> {{currentProject.billable}}</span><br>
-                            <span><strong>Go Live:</strong> {{currentProject.goLive}}</span><br>
-                            <span><strong>Client Review:</strong> {{currentProject.cr}}</span><br>
-                            <span><strong>Developer Review:</strong> {{currentProject.dr}}</span><br>
-                            <span><strong>Development Start:</strong> {{currentProject.devStart}}</span><br>
-                            <span><strong>QA:</strong> {{currentProject.qa}}</span><br>
-                            <span><strong>Notes:</strong> {{currentProject.notes}}</span>
+                            <span><strong>Go Live:</strong> {{currentProject.goLive | date: 'EEEE, MMMM d, y, h:mm:ss a'}}</span><br>
+                            <span><strong>Client Review:</strong> {{currentProject.cr | date: 'EEEE, MMMM d, y, h:mm:ss a'}}</span><br>
+                            <span><strong>Developer Review:</strong> {{currentProject.dr | date: 'EEEE, MMMM d, y, h:mm:ss a'}}</span><br>
+                            <span><strong>Development Start:</strong> {{currentProject.devStart | date: 'EEEE, MMMM d, y, h:mm:ss a'}}</span><br>
+                            <span><strong>QA:</strong> {{currentProject.qa | date: 'EEEE, MMMM d, y, h:mm:ss a'}}</span><br>
+                            <span><strong>Notes:</strong> {{currentProject.note}}</span>
                         </div>
                     </div>
                 </div>
