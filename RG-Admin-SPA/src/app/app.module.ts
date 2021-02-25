@@ -18,11 +18,13 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
 import { CommonModule } from "@angular/common";
 import { ScheduleComponent } from './components/schedule/schedule.component';
+import { SideNavComponent } from './components/side-nav/side-nav.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ScheduleComponent
+    ScheduleComponent,
+    SideNavComponent
   ],
   imports: [
     CommonModule,
