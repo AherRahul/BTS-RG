@@ -13,6 +13,7 @@ const productCategories = require('./routes/productCategories');
 const client = require('./routes/client');
 const project = require('./routes/project');
 const department = require('./routes/department');
+const jobTitle = require('./routes/jobTitle');
 
 // App Configurations
 const app = express();
@@ -43,6 +44,7 @@ app.use('/api/rgapp', productCategories);
 app.use('/api/rgapp', client);
 app.use('/api/rgapp', project);
 app.use('/api/rgapp', department);
+app.use('/api/rgapp', jobTitle);
 
 // Port Configuration for server
 const port = process.env.PORT || 3000;

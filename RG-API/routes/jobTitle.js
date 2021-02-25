@@ -17,7 +17,7 @@ router.post('/jobTitle', IsSignedIn, authHelper.VerifyToken, jobTitleCtrl.Create
 // Read
 router.get('/jobTitle', IsSignedIn, authHelper.VerifyToken, jobTitleCtrl.GetAllJobTitle);
 router.get('/jobTitle/:jobTitleId', IsSignedIn, authHelper.VerifyToken, jobTitleCtrl.GetJobTitleById);
-router.get('/jobTitle/:departmentId', IsSignedIn, authHelper.VerifyToken, jobTitleCtrl.GetAllJobTitleByDepartmentId);
+router.get('/jobTitleByDepartment/:departmentId', IsSignedIn, authHelper.VerifyToken, jobTitleCtrl.GetAllJobTitleByDepartmentId);
 
 
 // Update

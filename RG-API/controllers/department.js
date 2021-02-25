@@ -73,7 +73,6 @@ module.exports = {
             });
         }
 
-
         department = new Department(req.body);
 
         await department.save((error, department) => {
@@ -115,7 +114,7 @@ module.exports = {
             ( error, department ) => {
                 if (error) {
                     return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
-                        error: 'Error while getting department..!!'
+                        error: 'Error while updating department..!!'
                     });
                 }
 
