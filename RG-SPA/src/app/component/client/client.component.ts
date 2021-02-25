@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ClientService } from 'src/app/_services/client.service';
 
 @Component({
   selector: 'app-client',
@@ -9,38 +10,21 @@ export class ClientComponent implements OnInit {
 
   currentClient: any = {};
   segregateClientList = [];
-  ClientList = [
-    {
-      clientName: 'Microsoft',
-      notes: '',
-      colorCode: '#fc8e89'
-    },
-    {
-      clientName: 'F5 Network',
-      notes: '',
-      colorCode: '#a6fa85'
-    },
-    {
-      clientName: 'Abbot',
-      notes: '',
-      colorCode: '#a4bcff'
-    },
-    {
-      clientName: 'Salesforce',
-      notes: '',
-      colorCode: '#fade4d'
-    }
-  ]
+  ClientList = [];
   
-  constructor() { }
+  constructor(private clientService: ClientService) { }
 
-  ngOnInit(): void {
-    this.sortClient();
-    this.segregateClient();
+  ngOnInit (): void {
+    this.clientService.getAllClients().subscribe( (client) => {
+      this.ClientList = client;
+      
+      this.sortClient();
+      this.segregateClient();
+    });
   }
 
-  sortClient(): void {
-    this.ClientList.sort(function(a, b) {
+  sortClient (): void {
+    this.ClientList.sort ( function (a, b) {
       var textA = a.clientName.toUpperCase();
       var textB = b.clientName.toUpperCase();
       return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
@@ -55,7 +39,9 @@ export class ClientComponent implements OnInit {
         initial: '',
         Clients: []
       };
+
       initialObj.initial = String.fromCharCode(65 + i);
+      
       for (let j = 0; j < this.ClientList.length; j++) {
         let projInitial = this.ClientList[j].clientName.charAt(0);
 
@@ -63,12 +49,15 @@ export class ClientComponent implements OnInit {
           initialObj.Clients.push(this.ClientList[j]);
         }
       }
+      
       initialsWithClient.push(initialObj);
+    
     }
+    
     this.segregateClientList = initialsWithClient;
   }
 
-  modePopUp(Client){
+  modePopUp (Client) {
     this.currentClient = Client;
   }
 

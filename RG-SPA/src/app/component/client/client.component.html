@@ -6,8 +6,8 @@
             </div>
 
             <div class="row">
-                <div class="col-3 p-3"  *ngFor="let Client of clientRow.Clients"  data-toggle="modal" data-target=".bd-example-modal-lg" (click)='modePopUp(Client)'>
-                    <div class="toast show p-2" role="alert" aria-live="assertive" aria-atomic="true" style="border-left: solid 4px;" [style.border-color]="Client.colorCode">
+                <div class="col-3 p-3" id="{{Client._id}}"  *ngFor="let Client of clientRow.Clients"  data-toggle="modal" data-target=".bd-example-modal-lg" (click)='modePopUp(Client)'>
+                    <div class="toast show p-2" role="alert" aria-live="assertive" aria-atomic="true" style="border-left: solid 4px;" [style.border-color]="Client.clientColorCode">
                         <div class="row">               
                             <div class="col-12">
                                 <strong>{{Client.clientName}}</strong>
@@ -46,8 +46,8 @@
                     </div>
                     <div class="card-body">
                         <div class="pt-3" id="general">
-                            <span><strong>Color Code: </strong> </span><span class="colorbox" [style.background-color]="currentClient.colorCode"></span><br>
-                            <span><strong>Notes:</strong> {{currentClient.notes}}</span>
+                            <span><strong>Color Code: </strong> </span><span class="colorbox" [style.background-color]="currentClient.clientColorCode"></span><br>
+                            <span><strong>Notes:</strong> {{currentClient.note}}</span>
                         </div>
                     </div>
                 </div>
