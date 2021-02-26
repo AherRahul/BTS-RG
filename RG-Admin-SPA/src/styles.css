@@ -2,7 +2,8 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-@import '../node_modules/font-awesome/css/font-awesome.min.css';
 @import '../node_modules/bootswatch/dist/spacelab/bootstrap.min.css';
 @import '../node_modules/alertify/themes/alertify.bootstrap.css';
 @import '../node_modules/alertifyjs/build/css/themes/bootstrap.min.css';
+@import './assets/style/vendor/css/sb-admin-2.min.css';
+@import './assets/style/vendor/fontawesome-free/css/all.min.css';

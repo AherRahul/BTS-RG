@@ -19,12 +19,14 @@ import { RouterModule } from "@angular/router";
 import { CommonModule } from "@angular/common";
 import { ScheduleComponent } from './components/schedule/schedule.component';
 import { SideNavComponent } from './components/side-nav/side-nav.component';
+import { TopNavComponent } from './components/top-nav/top-nav.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ScheduleComponent,
-    SideNavComponent
+    SideNavComponent,
+    TopNavComponent
   ],
   imports: [
     CommonModule,
