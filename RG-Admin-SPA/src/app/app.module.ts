@@ -20,13 +20,19 @@ import { CommonModule } from "@angular/common";
 import { ScheduleComponent } from './components/schedule/schedule.component';
 import { SideNavComponent } from './components/side-nav/side-nav.component';
 import { TopNavComponent } from './components/top-nav/top-nav.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ScheduleComponent,
     SideNavComponent,
-    TopNavComponent
+    TopNavComponent,
+    DashboardComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     CommonModule,

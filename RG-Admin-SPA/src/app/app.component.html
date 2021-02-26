@@ -2,18 +2,25 @@
 
     <!-- Page Wrapper -->
     <div id="wrapper">
+        <div *ngIf="false">
 
-        <!-- Nav bar -->
-        <app-side-nav></app-side-nav>
+            <!-- Nav bar -->
+            <app-side-nav style="width: 12%; position:fixed;"></app-side-nav>
 
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
+            <!-- Content Wrapper -->
+            <div id="content-wrapper" class="d-flex flex-column">
 
-            <!-- Main Content -->
-            <div id="content">
-                <app-top-nav></app-top-nav>
+                <!-- Main Content -->
+                <div id="content">
+                    <app-top-nav></app-top-nav>
+
+                    <app-dashboard></app-dashboard>
+                </div>
             </div>
+
         </div>
-    
+    </div>
+    <div *ngIf="true">
+        <app-login></app-login>
     </div>
 </body>

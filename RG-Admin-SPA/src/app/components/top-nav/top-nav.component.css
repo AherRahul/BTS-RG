@@ -1,0 +1,5 @@
+.fix-bar {
+    position: fixed !important;
+    z-index: 9 !important;
+    width: 88% !important;
+}
