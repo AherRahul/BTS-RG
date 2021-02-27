@@ -23,6 +23,11 @@ import { TopNavComponent } from './components/top-nav/top-nav.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
+import { AlertifyService } from './_services/alertify.service';
+import { AuthService } from './_services/auth.service';
+import { ProjectService } from './_services/project.service';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptor } from './_services/token-interceptor';
 
 @NgModule({
   declarations: [
@@ -55,9 +60,20 @@ import { RegisterComponent } from './components/register/register.component';
     ButtonAllModule,
     DropDownButtonAllModule,
     SwitchAllModule,
-    BrowserModule
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    AlertifyService,
+    AuthService,
+    ProjectService,
+    {
+        provide: HTTP_INTERCEPTORS,
+        useClass: TokenInterceptor,
+        multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
