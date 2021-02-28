@@ -12,7 +12,42 @@
             <div id="content">
                 <app-top-nav></app-top-nav>
 
-                <app-dashboard></app-dashboard>
+                <div (componentName)='launchComponent($event)' *ngIf="component === 'dashboard'" >
+                    <app-dashboard></app-dashboard>
+                </div>
+
+                <div>
+                    <app-create-user></app-create-user>
+                </div>
+
+                <div>
+                    <app-create-allocation></app-create-allocation>
+                </div>
+
+                <div>
+                    <app-create-client></app-create-client>
+                </div>
+
+                <div>
+                    <app-create-project></app-create-project>
+                </div>
+
+                <div>
+                    <app-create-product-category></app-create-product-category>
+                </div>
+
+                <div>
+                    <app-create-resource-type></app-create-resource-type>
+                </div>
+
+                <div>
+                    <app-create-department></app-create-department>
+                </div>
+
+                <div>
+                    <app-create-job-title></app-create-job-title>
+                </div>
+
             </div>
         </div>
     </div>

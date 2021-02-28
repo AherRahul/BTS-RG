@@ -6,17 +6,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent implements OnInit {
-
-  LoggedIn = false;
+  component = 'dashboard';
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  loggedIn(logIn) {
-    this.LoggedIn = logIn;
-    console.log(this.LoggedIn);
+  launchComponent(componentName) {
+    this.component = componentName;
+    console.log(this.component);
     
   }
 }

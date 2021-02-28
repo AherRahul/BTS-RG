@@ -13,6 +13,8 @@ import { TokenService } from '../../_services/token.service';
 export class LoginComponent implements OnInit {
 
   @Output() isLoggedIn = new EventEmitter<any>();
+  @Output() componentName = new EventEmitter<any>();
+
   model: any = {};
   loginForm: FormGroup;
   errorMessage: any;
@@ -44,6 +46,7 @@ export class LoginComponent implements OnInit {
         this.tokenService.SetToken(data.token);
         this.loginForm.reset();
         this.isLoggedIn.emit(true);
+        this.componentName.emit('dashboard');
         this.alertify.success('Login Successful..!!')
         this.router.navigate(['dashboard']);
       },
@@ -65,5 +68,9 @@ export class LoginComponent implements OnInit {
 
   clearErrorMessage () {
     this.errorMessage = '';
+  }
+
+  forgotPassword () {
+    this.router.navigate(['forgot-password']);
   }
 }
