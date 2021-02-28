@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
         this.loginForm.reset();
         this.isLoggedIn.emit(true);
         this.alertify.success('Login Successful..!!')
-        this.router.navigate(['schedule']);
+        this.router.navigate(['dashboard']);
       },
       err => {
         console.log(err);

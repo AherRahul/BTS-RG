@@ -2,8 +2,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
+import {  JsonpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { DropDownButtonAllModule } from "@syncfusion/ej2-angular-splitbuttons";
+import { HttpClientModule } from '@angular/common/http';
 
 import { TreeViewModule } from "@syncfusion/ej2-angular-navigations";
 import { DropDownListAllModule, MultiSelectAllModule } from "@syncfusion/ej2-angular-dropdowns";
@@ -28,6 +30,7 @@ import { AuthService } from './_services/auth.service';
 import { ProjectService } from './_services/project.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './_services/token-interceptor';
+import { appRoutes } from './routes';
 
 @NgModule({
   declarations: [
@@ -62,7 +65,10 @@ import { TokenInterceptor } from './_services/token-interceptor';
     SwitchAllModule,
     BrowserModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    JsonpModule,
+    HttpClientModule,
+    RouterModule.forRoot(appRoutes)
   ],
   providers: [
     AlertifyService,
