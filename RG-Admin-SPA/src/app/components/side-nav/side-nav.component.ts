@@ -1,4 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
+import { AuthService } from 'src/app/_services/auth.service';
+import { DashboardComponent } from '../dashboard/dashboard.component';
 
 @Component({
   selector: 'app-side-nav',
@@ -8,8 +10,11 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 export class SideNavComponent implements OnInit {
 
   @Output() componentName = new EventEmitter<any>();
-
-  constructor() { }
+  @Input() sideBar: DashboardComponent;
+  
+  constructor(
+    private authService: AuthService
+  ) { }
 
   ngOnInit(): void {
   }
@@ -17,4 +22,10 @@ export class SideNavComponent implements OnInit {
   launchComponent(component) {
     this.componentName.emit(component);
   }
+
+  @HostListener('click')
+  click() {
+    this.authService.toggle();
+  }
+
 }

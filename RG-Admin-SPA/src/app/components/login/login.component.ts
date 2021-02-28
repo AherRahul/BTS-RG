@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 import { AlertifyService } from '../../_services/alertify.service';
 import { AuthService } from '../../_services/auth.service';
 import { Router } from '@angular/router';
@@ -13,7 +13,7 @@ import { TokenService } from '../../_services/token.service';
 export class LoginComponent implements OnInit {
 
   @Output() isLoggedIn = new EventEmitter<any>();
-  @Output() componentName = new EventEmitter<any>();
+  @Output() componentName: EventEmitter<any> = new EventEmitter();
 
   model: any = {};
   loginForm: FormGroup;
@@ -40,13 +40,14 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  @HostListener('click')
   loginUser () {
     this.authService.loginUser(this.loginForm.value).subscribe(
       data => {
         this.tokenService.SetToken(data.token);
         this.loginForm.reset();
         this.isLoggedIn.emit(true);
-        this.componentName.emit('dashboard');
+        this.authService.toggle();
         this.alertify.success('Login Successful..!!')
         this.router.navigate(['dashboard']);
       },

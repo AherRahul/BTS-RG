@@ -3,7 +3,7 @@
     <div id="wrapper" >
         
         <!-- Nav bar -->
-        <app-side-nav style="width: 12%; position:fixed;"></app-side-nav>
+        <app-side-nav style="width: 12%; position:fixed;" ></app-side-nav>
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -12,11 +12,11 @@
             <div id="content">
                 <app-top-nav></app-top-nav>
 
-                <div (componentName)='launchComponent($event)' *ngIf="component === 'dashboard'" >
+                <div *ngIf="isOpen">
                     <app-dashboard></app-dashboard>
                 </div>
 
-                <div>
+                <div  *ngIf="componentName === 'user'">
                     <app-create-user></app-create-user>
                 </div>
 

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/_services/auth.service';
 
 @Component({
   selector: 'app-admin',
@@ -6,16 +7,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent implements OnInit {
-  component = 'dashboard';
-
-  constructor() { }
+  componentName;
+  isOpen = false;
+  
+  constructor(
+    private authService: AuthService
+  ) { }
 
   ngOnInit(): void {
-  }
-
-  launchComponent(componentName) {
-    this.component = componentName;
-    console.log(this.component);
-    
+    this.authService.change.subscribe(isOpen => {
+      this.isOpen = isOpen;
+    });
   }
 }
