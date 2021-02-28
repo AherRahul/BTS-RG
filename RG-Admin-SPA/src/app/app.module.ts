@@ -31,6 +31,9 @@ import { ProjectService } from './_services/project.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './_services/token-interceptor';
 import { appRoutes } from './routes';
+import { AdminComponent } from './components/admin/admin.component';
+import { PageNoteFoundComponent } from './components/page-note-found/page-note-found.component';
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +43,10 @@ import { appRoutes } from './routes';
     TopNavComponent,
     DashboardComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    AdminComponent,
+    PageNoteFoundComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     CommonModule,

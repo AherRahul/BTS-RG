@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'app-admin',
+  templateUrl: './admin.component.html',
+  styleUrls: ['./admin.component.css']
 })
-export class AppComponent {
-  title = 'RG-Admin-SPA';
+export class AdminComponent implements OnInit {
+
   LoggedIn = false;
-  
+
   constructor() { }
 
   ngOnInit(): void {

@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
       },
       err => {
         console.log(err);
-        
+        this.isLoggedIn.emit(false);
         setTimeout(() => {
           if (err.error.error) {
             this.alertify.error(err.error.error);
