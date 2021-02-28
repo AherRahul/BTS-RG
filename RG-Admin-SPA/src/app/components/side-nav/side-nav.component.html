@@ -25,36 +25,36 @@
     </div>
 
     <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item">
-        <a class="nav-link collapsed"  data-toggle="collapse" data-target="#collapseTwo"
-            aria-expanded="true" aria-controls="collapseTwo">
+    <li class="nav-item" dropdown>
+        <a class="nav-link collapsed"  data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo" dropdownToggle>
             <i class="fas fa-fw fa-cog"></i>
-            <span>Components</span>
+            <span>Create New</span>
         </a>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar" *dropdownMenu>
+            <div role="menuitem" class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Custom Components:</h6>
-                <a class="collapse-item">Buttons</a>
-                <a class="collapse-item">Cards</a>
+                <a class="collapse-item">User</a>
+                <a class="collapse-item">Allocations</a>
             </div>
         </div>
     </li>
 
+
     <!-- Nav Item - Utilities Collapse Menu -->
-    <li class="nav-item">
-        <a class="nav-link collapsed" data-toggle="collapse" data-target="#collapseUtilities"
-            aria-expanded="true" aria-controls="collapseUtilities">
+    <li class="nav-item" dropdown>
+        <a class="nav-link collapsed" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities" dropdownToggle>
             <i class="fas fa-fw fa-wrench"></i>
-            <span>Utilities</span>
+            <span>Create New Utilities</span>
         </a>
-        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-            data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
+        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar" *dropdownMenu>
+            <div role="menuitem" class="bg-white py-2 collapse-inner rounded" >
                 <h6 class="collapse-header">Custom Utilities:</h6>
-                <a class="collapse-item">Colors</a>
-                <a class="collapse-item">Borders</a>
-                <a class="collapse-item">Animations</a>
-                <a class="collapse-item">Other</a>
+                <a class="collapse-item">Client</a>
+                <a class="collapse-item">Project</a>
+                <a class="collapse-item">Product category</a>
+                <a class="collapse-item">Resource Type</a>
+                <a class="collapse-item">Department</a>
+                <a class="collapse-item">Job Title</a>
             </div>
         </div>
     </li>

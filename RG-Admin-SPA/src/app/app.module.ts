@@ -1,11 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import {  JsonpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { DropDownButtonAllModule } from "@syncfusion/ej2-angular-splitbuttons";
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';// RECOMMENDED
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+
 
 import { TreeViewModule } from "@syncfusion/ej2-angular-navigations";
 import { DropDownListAllModule, MultiSelectAllModule } from "@syncfusion/ej2-angular-dropdowns";
@@ -34,6 +37,14 @@ import { appRoutes } from './routes';
 import { AdminComponent } from './components/admin/admin.component';
 import { PageNoteFoundComponent } from './components/page-note-found/page-note-found.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+import { CreateUserComponent } from './components/create-user/create-user.component';
+import { CreateAllocationComponent } from './components/create-allocation/create-allocation.component';
+import { CreateClientComponent } from './components/create-client/create-client.component';
+import { CreateProjectComponent } from './components/create-project/create-project.component';
+import { CreateProductCategoryComponent } from './components/create-product-category/create-product-category.component';
+import { CreateResourceTypeComponent } from './components/create-resource-type/create-resource-type.component';
+import { CreateDepartmentComponent } from './components/create-department/create-department.component';
+import { CreateJobTitleComponent } from './components/create-job-title/create-job-title.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +57,15 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
     RegisterComponent,
     AdminComponent,
     PageNoteFoundComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    CreateUserComponent,
+    CreateAllocationComponent,
+    CreateClientComponent,
+    CreateProjectComponent,
+    CreateProductCategoryComponent,
+    CreateResourceTypeComponent,
+    CreateDepartmentComponent,
+    CreateJobTitleComponent
   ],
   imports: [
     CommonModule,
@@ -74,7 +93,9 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
     ReactiveFormsModule,
     JsonpModule,
     HttpClientModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    BrowserAnimationsModule,
+    BsDropdownModule.forRoot()
   ],
   providers: [
     AlertifyService,
