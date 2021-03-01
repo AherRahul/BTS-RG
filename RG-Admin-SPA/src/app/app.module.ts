@@ -9,7 +9,6 @@ import { DropDownButtonAllModule } from "@syncfusion/ej2-angular-splitbuttons";
 import { HttpClientModule } from '@angular/common/http';// RECOMMENDED
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
-
 import { TreeViewModule } from "@syncfusion/ej2-angular-navigations";
 import { DropDownListAllModule, MultiSelectAllModule } from "@syncfusion/ej2-angular-dropdowns";
 import { MaskedTextBoxModule, UploaderAllModule } from "@syncfusion/ej2-angular-inputs";

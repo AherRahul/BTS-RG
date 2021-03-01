@@ -9765,6 +9765,7 @@ a:focus {
   width: 88%;
   margin-left: 12%;
   overflow-x: hidden;
+  height: 100vh;
 }
 
 #wrapper #content-wrapper #content {
@@ -11244,3 +11245,4 @@ footer.sticky-footer .copyright {
 body.sidebar-toggled footer.sticky-footer {
   width: 100%;
 }
+

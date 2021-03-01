@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/_services/auth.service';
+import { SideNavService } from 'src/app/_services/side-nav.service';
 
 @Component({
   selector: 'app-admin',
@@ -7,16 +7,16 @@ import { AuthService } from 'src/app/_services/auth.service';
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent implements OnInit {
-  componentName;
+  componentName = 'dashboard';
   isOpen = false;
   
   constructor(
-    private authService: AuthService
+    private sideNavService: SideNavService
   ) { }
 
   ngOnInit(): void {
-    this.authService.change.subscribe(isOpen => {
-      this.isOpen = isOpen;
+    this.sideNavService.change.subscribe(componentName => {
+      this.componentName = componentName;
     });
   }
 }

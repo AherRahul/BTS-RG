@@ -40,29 +40,28 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  @HostListener('click')
   loginUser () {
     this.authService.loginUser(this.loginForm.value).subscribe(
       data => {
         this.tokenService.SetToken(data.token);
         this.loginForm.reset();
         this.isLoggedIn.emit(true);
-        this.authService.toggle();
+        //this.authService.toggle();
         this.alertify.success('Login Successful..!!')
         this.router.navigate(['dashboard']);
       },
       err => {
-        console.log(err);
-        this.isLoggedIn.emit(false);
-        setTimeout(() => {
-          if (err.error.error) {
-            this.alertify.error(err.error.error);
-          }
-
-          if (err.error.msg[0].message) {
-            this.alertify.warning(err.error.msg[0].message);
-          }
-        }, 500);
+        if (err) {
+          setTimeout(() => {
+            if (err.error.error) {
+              this.alertify.error(err.error.error);
+            }
+  
+            if (err.error.msg[0].message) {
+              this.alertify.warning(err.error.msg[0].message);
+            }
+          }, 500);
+        }
       }
     );
   }
