@@ -1,12 +1,11 @@
 /* BASIC */
 
-html {
-    background-color: #56baed;
-}
-
-body {
-    font-family: "Poppins", sans-serif;
+.bg-gradient-primary {
+    display: flex;
     height: 100vh;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
 }
 
 a {
@@ -51,7 +50,6 @@ h2 {
     -webkit-box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
     box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
     text-align: center;
-    margin-top: 12rem;
 }
 
 #formFooter {

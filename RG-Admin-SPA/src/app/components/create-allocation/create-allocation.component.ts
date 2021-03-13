@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-create-allocation',
@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreateAllocationComponent implements OnInit {
 
+  @Input() outerCardTitle = "Create Allocation";
+  
   constructor() { }
 
   ngOnInit(): void {

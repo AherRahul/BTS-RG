@@ -1,5 +1,6 @@
 .fix-bar {
-    position: fixed !important;
+    position: relative !important;
     z-index: 9 !important;
-    width: 88% !important;
+    width: 100% !important;
+    display: flex;
 }

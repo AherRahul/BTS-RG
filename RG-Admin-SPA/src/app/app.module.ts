@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { DropDownButtonAllModule } from "@syncfusion/ej2-angular-splitbuttons";
 import { HttpClientModule } from '@angular/common/http';// RECOMMENDED
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { SharedModule } from './shared/shared.module';
 
 import { TreeViewModule } from "@syncfusion/ej2-angular-navigations";
 import { DropDownListAllModule, MultiSelectAllModule } from "@syncfusion/ej2-angular-dropdowns";
@@ -67,6 +68,7 @@ import { CreateJobTitleComponent } from './components/create-job-title/create-jo
     CreateJobTitleComponent
   ],
   imports: [
+    SharedModule,
     CommonModule,
     HttpModule,
     ScheduleAllModule,

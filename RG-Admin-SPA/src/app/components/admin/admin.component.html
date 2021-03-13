@@ -3,14 +3,19 @@
     <div id="wrapper" >
         
         <!-- Nav bar -->
-        <app-side-nav style="width: 12%; position:fixed;" ></app-side-nav>
+        <div id="navbar-container">
+            <app-side-nav></app-side-nav>
+        </div>
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
 
             <!-- Main Content -->
-            <div id="content">
-                <app-top-nav></app-top-nav>
+            <div id="content right-hand-container">
+                
+                <div class="fix-nav-bar">
+                    <app-top-nav></app-top-nav>
+                </div>
 
                 <div class="content-container" *ngIf="componentName == 'dashboard'">
                     <app-dashboard></app-dashboard>

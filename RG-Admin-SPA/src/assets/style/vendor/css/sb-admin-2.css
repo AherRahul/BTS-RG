@@ -9762,11 +9762,11 @@ a:focus {
 
 #wrapper #content-wrapper {
   background-color: #f8f9fc;
-  width: 88%;
-  margin-left: 12%;
   overflow-x: hidden;
   height: 100vh;
+  width: 100%
 }
+
 
 #wrapper #content-wrapper #content {
   flex: 1 0 auto;
