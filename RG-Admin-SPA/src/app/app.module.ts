@@ -19,7 +19,12 @@ import { DatePickerAllModule, TimePickerAllModule, DateTimePickerAllModule } fro
 import { NumericTextBoxAllModule, TextBoxAllModule } from "@syncfusion/ej2-angular-inputs";
 import { ScheduleAllModule, RecurrenceEditorAllModule } from "@syncfusion/ej2-angular-schedule";
 import { HttpModule } from "@angular/http";
+
+
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { RxReactiveDynamicFormsModule } from "@rxweb/reactive-dynamic-forms"
+import { RxReactiveFormsModule } from "@rxweb/reactive-form-validators"
+
 import { RouterModule } from "@angular/router";
 import { CommonModule } from "@angular/common";
 import { ScheduleComponent } from './components/schedule/schedule.component';
@@ -92,6 +97,8 @@ import { CreateJobTitleComponent } from './components/create-job-title/create-jo
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
+    RxReactiveDynamicFormsModule,
+    RxReactiveFormsModule,
     JsonpModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
